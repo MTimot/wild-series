@@ -17,11 +17,15 @@ router.post("/api/items", itemActions.add);
 
 // Declaration of a "Welcome" route
 
+import categoryAction from "./modules/category/categoryAction";
 import programActions from "./modules/program/programActions";
 import sayActions from "./modules/say/sayActions";
 
 router.get("/", sayActions.sayWelcome);
 router.get("/api/programs", programActions.browse);
+router.get("/api/programs/:id", programActions.read);
+router.get("/api/categories", categoryAction.categoriesList);
+router.get("/api/categories/:id", categoryAction.category);
 /* ************************************************************************* */
 
 export default router;
