@@ -1,6 +1,7 @@
-// Some data to make the trick
-
 import type { RequestHandler } from "express";
+// Some data to make the trick
+// Import access to data
+import categoryRepository from "./categoryRepository";
 
 const categories = [
   {
@@ -16,10 +17,11 @@ const categories = [
 // Declare the actions
 
 /* Here you code */
-const categoriesList: RequestHandler = (req, res) => {
-  res.json(categories);
-};
+const browse: RequestHandler = async (req, res) => {
+  const categoriesFromDB = await categoryRepository.readAll();
 
+  res.json(categoriesFromDB);
+};
 const category: RequestHandler = (req, res) => {
   const parsedId = Number.parseInt(req.params.id);
   const category = categories.find((category) => category.id === parsedId);
@@ -32,6 +34,6 @@ const category: RequestHandler = (req, res) => {
 // Export them to import them somewhere else
 
 export default {
-  /* Here you export */ categoriesList,
+  /* Here you export */ browse,
   category,
 };
