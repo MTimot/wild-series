@@ -3,3 +3,21 @@
   padding: 0;
   box-sizing: border-box;
 }
+:root {
+  --main-color: RGB(37, 40, 61);
+  --secondary-color: RGB(89, 210, 254);
+  --third-color: RGB(143, 57, 133);
+}
+
+body {
+  background-color: var(--main-color);
+  color: var(--third-color);
+}
+a {
+  text-decoration: none;
+  color: var(--secondary-color);
+}
+nav {
+  display: flex;
+  justify-content: space-between;
+}

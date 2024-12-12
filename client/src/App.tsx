@@ -1,9 +1,18 @@
+import { Link, Outlet } from "react-router-dom";
 import "./App.css";
 
 function App() {
   return (
     <>
-      <h1>WILD SERIES</h1>
+      <nav>
+        <Link to="/">
+          <h1>WILD SERIES</h1>
+        </Link>
+        <Link to="/programs">
+          <h2>Séries</h2>
+        </Link>
+      </nav>
+      <Outlet />
     </>
   );
 }
