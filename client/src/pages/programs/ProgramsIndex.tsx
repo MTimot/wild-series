@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import "./ProgramsIndex.css";
+
 interface Program {
   id: number;
   title: string;
@@ -7,7 +9,7 @@ interface Program {
   country: string;
   year: number;
 }
-function Programs() {
+function ProgramsIndex() {
   const [programsTab, setProgramsTab] = useState<Program[]>([]);
   useEffect(() => {
     fetch("http://localhost:3310/api/programs")
@@ -18,20 +20,26 @@ function Programs() {
   }, []);
   return (
     <>
-      {programsTab.map((program: Program) => (
-        <ul key={program.id}>
-          <li>
+      <ul className="program-list">
+        {programsTab.map((program: Program) => (
+          <li key={program.id} className="program-description">
             <h2>{program.title}</h2>
-            <img src={program.poster} alt={`Poster pour ${program.title}`} />
-            <p>Synopsis : {program.synopsis}</p>
+            <div className="poster-container">
+              <img
+                src={program.poster}
+                alt={`Poster pour ${program.title}`}
+                className="poster"
+              />
+            </div>
+            <p className="synopsis">Synopsis : {program.synopsis}</p>
             <p>
               {" "}
               country : {program.country}, year : {program.year}
             </p>
           </li>
-        </ul>
-      ))}
+        ))}
+      </ul>
     </>
   );
 }
-export default Programs;
+export default ProgramsIndex;
