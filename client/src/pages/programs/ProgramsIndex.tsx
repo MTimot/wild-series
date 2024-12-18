@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./ProgramsIndex.css";
+import { Link } from "react-router-dom";
 
 interface Program {
   id: number;
@@ -10,20 +11,23 @@ interface Program {
   year: number;
 }
 function ProgramsIndex() {
-  const [programsTab, setProgramsTab] = useState<Program[]>([]);
+  const [programs, setPrograms] = useState([] as Program[]);
   useEffect(() => {
-    fetch("http://localhost:3310/api/programs")
-      .then((result) => result.json())
-      .then((data) => {
-        setProgramsTab(data);
+    fetch(`${import.meta.env.VITE_API_URL}/api/programs`)
+      .then((response) => response.json())
+      .then((data: Program[]) => {
+        setPrograms(data);
       });
   }, []);
   return (
     <>
+      <Link to="/programs/new">Ajouter une série</Link>
       <ul className="program-list">
-        {programsTab.map((program: Program) => (
+        {programs.map((program: Program) => (
           <li key={program.id} className="program-description">
-            <h2>{program.title}</h2>
+            <Link to={`/programs/${program.id}`}>
+              <h2 className="program-title">{program.title}</h2>
+            </Link>
             <div className="poster-container">
               <img
                 src={program.poster}

@@ -20,3 +20,6 @@
 .synopsis {
   width: 80%;
 }
+.program-title {
+  color: var(--main-color);
+}
