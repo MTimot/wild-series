@@ -28,17 +28,6 @@ const programs = [
 import type { RequestHandler } from "express";
 import programRepository from "./programRepository";
 
-// const browse: RequestHandler = (req, res) => {
-//   if (req.query.q != null) {
-//     const filteredPrograms = programs.filter((program) =>
-//       program.synopsis.includes(req.query.q as string),
-//     );
-
-//     res.json(filteredPrograms);
-//   } else {
-//   }
-// };
-
 const browse: RequestHandler = async (req, res) => {
   const programsFromDB = await programRepository.readAll();
 
@@ -68,7 +57,6 @@ const edit: RequestHandler = async (req, res, next) => {
       country: req.body.country,
       year: Number(req.body.year),
     };
-
     const affectedRows = await programRepository.update(program);
 
     // If the category is not found, respond with HTTP 404 (Not Found)
@@ -118,6 +106,29 @@ const destroy: RequestHandler = async (req, res, next) => {
     next(err);
   }
 };
+const validate: RequestHandler = (req, res, next) => {
+  type ValidationError = {
+    field: string;
+    message: string;
+  };
+  const errors: ValidationError[] = [];
+  const { name } = req.body;
+
+  // put your validation rules here
+  if (name == null) {
+    errors.push({ field: "name", message: "The field is required" });
+  } else if (name.length > 255) {
+    errors.push({
+      field: "name",
+      message: "Should contain less than 255 characters",
+    });
+  }
+  if (errors.length === 0) {
+    next();
+  } else {
+    res.status(400).json({ validationErrors: errors });
+  }
+};
 // Export it to import it somewhere else
 
-export default { browse, read, edit, add, destroy };
+export default { browse, read, edit, add, destroy, validate };

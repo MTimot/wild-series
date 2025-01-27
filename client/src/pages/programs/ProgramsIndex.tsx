@@ -12,6 +12,7 @@ interface Program {
 }
 function ProgramsIndex() {
   const [programs, setPrograms] = useState([] as Program[]);
+
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/api/programs`)
       .then((response) => response.json())
@@ -19,6 +20,7 @@ function ProgramsIndex() {
         setPrograms(data);
       });
   }, []);
+
   return (
     <>
       <Link to="/programs/new">Ajouter une série</Link>

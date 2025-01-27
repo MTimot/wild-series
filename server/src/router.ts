@@ -27,8 +27,12 @@ router.get("/api/programs/:id", programActions.read);
 router.put("/api/programs/:id", programActions.edit);
 router.post("/api/programs", programActions.add);
 router.delete("/api/programs/:id", programActions.destroy);
+
 router.get("/api/categories", categoryAction.browse);
-router.get("/api/categories/:id", categoryAction.category);
+router.get("/api/categories/:id", categoryAction.read);
+router.put("/api/categories/:id", categoryAction.validate, categoryAction.edit);
+router.post("/api/categories", categoryAction.validate, categoryAction.add);
+router.delete("/api/categories/:id", categoryAction.destroy);
 /* ************************************************************************* */
 
 export default router;

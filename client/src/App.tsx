@@ -11,6 +11,9 @@ function App() {
         <Link to="/programs">
           <h2>Séries</h2>
         </Link>
+        <Link to="/categories">
+          <h2>Catégories</h2>
+        </Link>
       </nav>
       <Outlet />
     </>

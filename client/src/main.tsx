@@ -7,6 +7,10 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 // Import the main app component
 import App from "./App";
+import CategoryDetails from "./pages/categories/CategoryDetails";
+import CategoryEdit from "./pages/categories/CategoryEdit";
+import CategoryIndex from "./pages/categories/CategoryIndex";
+import CategoryNew from "./pages/categories/CategoryNew";
 import ProgramDetail from "./pages/programs/ProgramDetail";
 import ProgramEdit from "./pages/programs/ProgramEdit";
 import ProgramNew from "./pages/programs/ProgramNew";
@@ -42,6 +46,22 @@ const router = createBrowserRouter([
       {
         path: "/programs/new",
         element: <ProgramNew />,
+      },
+      {
+        path: "/categories",
+        element: <CategoryIndex />,
+      },
+      {
+        path: "/categories/:id",
+        element: <CategoryDetails />,
+      },
+      {
+        path: "/categories/:id/edit",
+        element: <CategoryEdit />,
+      },
+      {
+        path: "/categories/new",
+        element: <CategoryNew />,
       },
     ],
   },
